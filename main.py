@@ -7,7 +7,7 @@ from acm import get_abstract_acm
 
 
 file_content = ''
-file_name_proceedings = 'journal_queue_test.txt'
+file_name_proceedings = 'journal_queue.txt'
 f = open(file_name_proceedings,'r')
 line = f.readline()
 
