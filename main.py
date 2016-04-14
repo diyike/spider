@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# encoding: utf-8
+
 
 from ieee import get_abstract_ieee
 from springer import get_abstract_springer
