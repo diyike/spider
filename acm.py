@@ -267,4 +267,3 @@ def GetMiddleStr(content,startStr,endStr):
     m = re.search(p,content)
     if m:
         return m.group(1)
-
