@@ -30,7 +30,7 @@ def get_abstract_acm(url):
     loop_times = 0
     while loop_times < 5:
         try:
-            time.sleep(random.randint(1, 5))
+            time.sleep(random.randint(1, 10))
             source_code = requests.get(url,headers=random.choice(headers))  #为URL传递参数
             if source_code != '' and source_code.status_code == 200:
                 break
@@ -267,4 +267,3 @@ def GetMiddleStr(content,startStr,endStr):
     m = re.search(p,content)
     if m:
         return m.group(1)
-

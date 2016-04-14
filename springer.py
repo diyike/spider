@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 requests.adapters.DEFAULT_RETRIES = 5
 
-file_name = 'springer1023.xml'
+file_name = 'springer.xml'
 file_content = ''  # 最终要写到文件里的内容
 articles_begin = '\n' + '<articles>' + '\n'
 articles_end = '</articles>' + '\n'
@@ -125,12 +125,12 @@ def get_abstract_springer(url):
                 file_content += '<online_issn>' + online_issn + '</online_issn>' + '\n'
         else:
             print 'no issns'
-        # if soup.find('meta',{'name':'citation_online_date'}):
-        #     online_date = soup.find('meta',{'name':'citation_online_date'})
-        #     online_date = dict(online_date.attrs)['content']
-        #     file_content += '<online_date>' + online_date + '</online_date>' + '\n'
-        # else:
-        #     print 'no online_date'
+        if soup.find('meta',{'name':'citation_online_date'}):
+            online_date = soup.find('meta',{'name':'citation_online_date'})
+            online_date = dict(online_date.attrs)['content']
+            file_content += '<online_date>' + online_date + '</online_date>' + '\n'
+        else:
+            print 'no online_date'
         if soup.find('meta',{'name':'citation_cover_date'}):
             cover_date = soup.find('meta',{'name':'citation_cover_date'})
             cover_date = dict(cover_date.attrs)['content']
@@ -176,10 +176,10 @@ def get_abstract_springer(url):
             print 'no abstract'
 
         # get topics, keywords
-        # conf_list = conf_list.find('div',{'id':'abstract-about'})
-        # article_info = conf_list.find('div',{'class':'summary'})
+        conf_list = conf_list.find('div',{'id':'abstract-about'})
+        article_info = conf_list.find('div',{'class':'summary'})
 
-        topic_info = soup.find('ul',{'class':'abstract-about-subject'})
+        topic_info = article_info.find('ul',{'class':'abstract-about-subject'})
         if topic_info:
             for conf in topic_info.findAll('a'):
                 topic = conf.get_text().strip()
@@ -187,7 +187,7 @@ def get_abstract_springer(url):
         else:
             print 'no topics'
 
-        keyword_info = soup.find('ul',{'class':'abstract-keywords'})
+        keyword_info = article_info.find('ul',{'class':'abstract-keywords'})
         if keyword_info:
             for conf in keyword_info.findAll('li'):
                 keyword = conf.get_text().strip()
@@ -212,4 +212,3 @@ def get_abstract_springer(url):
         f.close()
     else:
         print 'Request error not 200'
-

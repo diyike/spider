@@ -9,7 +9,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 requests.adapters.DEFAULT_RETRIES = 5
 
-file_name = '1137.xml'
+file_name = 'ieee.xml'
 
 file_content = ''  # 最终要写到文件里的内容
 articles_begin = '\n' + '<articles>' + '\n'
@@ -22,7 +22,7 @@ headers = [
     {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0'}
 ]
 
-def get_abstract_siam(url):
+def get_abstract_ieee(url):
     f = open(file_name, 'a')
     file_content = ''
     source_code = ''
